@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Run application in background
           command: |
-            docker run ${DOCKER_REPO}/${CIRCLE_PROJECT_REPONAME}
+            docker run ${DOCKER_REPO}/${CIRCLE_PROJECT_REPONAME} -d
           background: true
 
       - run:
@@ -45,7 +45,7 @@ jobs:
             docker pull owasp/zap2docker-weekly && \
             docker run -t owasp/zap2docker-weekly zap-baseline.py \
                 -u https://raw.githubusercontent.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/master/zap-baseline.conf \
-                -t http://localhost:8080/ || \
+                -t http://172.17.0.2:8080/ || \
             if [ $? -ne 1 ]; then exit 0; else exit 1; fi;
             )
 
