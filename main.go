@@ -250,6 +250,6 @@ func getVersion(w http.ResponseWriter, r *http.Request) {
 }`, version, commit)))
 }
 
-func checkCSRFToken() bool {
+func checkCSRFToken(token string) bool {
 	return true
 }
